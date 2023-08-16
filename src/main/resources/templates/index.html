@@ -1,0 +1,120 @@
+<html layout:decorate="~{common/layout/defaultLayout}">
+	<!-- s : main area -->
+    <main layout:fragment="content">
+
+      <!-- s : image slide -->
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="4000">
+            <img src="./images/slide01.jpg" class="d-block w-100" alt="slide">
+            <div class="carousel-caption d-md-block">
+              <h3>세무 해결</h3>
+              <p>세무스미스와 함께</p>
+              <a href="./inquiry.html" class="btn btn-light">상담하기</a>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="4000">
+            <img src="./images/slide02.jpg" class="d-block w-100" alt="slide">
+            <div class="carousel-caption d-md-block">
+              <h3>세무 해결</h3>
+              <p>세무스미스와 함께</p>
+              <a href="./inquiry.html" class="btn btn-light">상담하기</a>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="4000">
+            <img src="./images/slide03.jpg" class="d-block w-100" alt="slide">
+            <div class="carousel-caption d-md-block">
+              <h3>세무 해결</h3>
+              <p>세무스미스와 함께</p>
+              <a href="./inquiry.html" class="btn btn-light">상담하기</a>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!-- e : image slide -->
+
+      <!-- s : card group -->
+      <div>
+        <div class="row text-center m-1 p-5">
+          <div class="col-md-4">
+            <div class="card">
+              <img src="./images/service_thum01.png" alt="thumbnail">
+              <div class="card-body">
+                <h4 class="card-title">세무사 소개</h4>
+                <p class="card-text">믿을수 있는<br/> 세무서비스</p>
+                <a href="./team.html" class="btn btn-secondary">상세보기</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="./images/service_thum02.png" alt="thumbnail">
+              <div class="card-body">
+                <h4 class="card-title">서비스 안내</h4>
+                <p class="card-text">다양한 세무서비스를<br/>최고의 인재와 함께</p>
+                <a href="./service/agency.html" class="btn btn-secondary">상세보기</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="./images/service_thum03.png" alt="thumbnail">
+              <div class="card-body">
+                <h4 class="card-title">이달의 세무</h4>
+                <p class="card-text">세무소식을<br/>쉽고 빠르게</p>
+                <a href="./boards/news.html" class="btn btn-secondary">상세보기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- e : card group -->
+
+      <div class="row align-items-md-stretch m-5">
+        <div class="col-md-6">
+          <div class="h-80 p-3 text-bg-dark">
+            <h3>[공지사항]</h3>
+            <p>새로 업데이트된 세무 소식</p>
+            <a href="./boards/news.html"><small>Read More...</small></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="h-80 p-3 bg-body-secondary border">
+            <h3>온라인 상담</h3>
+            <p>궁금하신 세무 업무를 상담해드립니다.</p>
+            <span>온라인 상담</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="h-80 p-3 bg-body-tertiary border">
+            <h3>[경정청구]</h3>
+            <p>세금신고 잘 하고 계신가요? 환급금을 찾아보세요.</p>
+            <a href="./service/agency.html"><small>Read More...</small></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="h-80 p-3">
+            <h3>고객센터</h3>
+            <p>궁금하신 사항은 아래로 문의 해주세요.</p>
+            <span>전화 : 02-0000-0000</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <!-- e: main area -->
+  
+  	<button type="button" class="btn btn-light" id="btn-to-top">
+      <svg class="bi" width="16" height="16"><use xlink:href="#arrowup"/></svg>
+    </button>
+
+    <script src="js/javaScript.js"></script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/fragments/head::headFragment}">
+</head>
+
+<body>
+	
+	<!-- icons Import -->
+	<th:block th:replace="~{common/fragments/icons::iconsFragment}"></th:block>
+	
+	<!-- header Import -->
+	<th:block th:replace="~{common/fragments/header::headerFragment}"></th:block>
+	
+	<div class="container-xxl m-0 p-0 m-auto">
+	<!-- content Import -->
+	<th:block layout:fragment="content"></th:block>
+	
+	</div>
+	<!-- footer Import -->
+	<th:block th:replace="~{common/fragments/footer::footerFragment}"></th:block>
+	
+	<!-- Login Import -->
+	<th:block th:replace="~{common/fragments/loginForm::loginFragment}"></th:block>
+	
+	<!-- bootstrap JavaScript Import
+    <script th:src="@{/bootstrap.min.js}"></script> -->
+
+	<!-- custom script Import -->
+	
+    <th:block layout:fragment="script"></th:block>
+
+</body>
+
+</html>
