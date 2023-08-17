@@ -22,4 +22,9 @@ public class ServController {
 	public String consulting() {
 		return "pages/service/consulting";
 	}
+	
+	@GetMapping("/inquiry")
+	public String inquiry() {
+		return "pages/inquiry";
+	}
 }

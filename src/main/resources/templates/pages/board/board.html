@@ -1,0 +1,92 @@
+ <html layout:decorate="~{common/layout/defaultLayout}">
+    <!-- s : main area -->
+    <main layout:fragment="content">
+
+      <div class="boardNews d-flex align-items-center justify-content-center bg-body-secondary bg-opacity-50">
+        <div class="text-center">
+          <h4 class="fw-bold">세무 뉴스</h4>
+          <small class="fw-light">새로운 세무 소식을 확인하세요.</small>
+        </div>
+      </div>
+
+      <div class="container my-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+            <li class="breadcrumb-item" aria-current="page">
+                뉴스
+            </li>
+            <li class="breadcrumb-item">
+              <a class="link-body-emphasis fw-semibold text-decoration-none" href="/boards/inside">
+                일정
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a class="link-body-emphasis fw-semibold text-decoration-none" href="/boards/data">
+                자료
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="container">
+        <table class="table caption-top">
+          <caption>세무 뉴스</caption>
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성일</th>
+              <th scope="col">작성자</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">4</td>
+              <td>새로운 세무소식을 확인하세요.</td>
+              <td>2023-06-25</td>
+              <td>관리자</td>
+            </tr>
+            <tr>
+              <td scope="row">3</td>
+              <td>해외 금융계좌신고 ‘가상자산계좌’ 첫 포함</td>
+              <td>2023-06-10</td>
+              <td>관리자</td>
+            </tr>
+            <tr>
+              <td scope="row">2</td>
+              <td>증빙없는 해외송금 한도 내달초부터 5만→10만달러 상향</td>
+              <td>2023-03-16</td>
+              <td>관리자</td>
+            </tr>
+            <tr>
+              <td scope="row">1</td>
+              <td>홈택스·워크넷 등 정부 서비스 통합창구 본격 추진</td>
+              <td>2023-02-28</td>
+              <td>관리자</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link text-dark" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link text-dark" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+      </div>
+      </div>
+
+    </main>
+    <!-- e: main area -->
+
+</html>

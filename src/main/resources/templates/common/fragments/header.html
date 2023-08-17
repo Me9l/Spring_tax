@@ -1,54 +1,52 @@
-<!-- s : header nav -->
-    <header th:fragment="headerFragment">
-      <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="/">
-          <img src="../images/logo.png" alt="Logo" width="120" height="60" class="d-inline-block">
-          세무스미스
-        </a>
-        <!-- s : hamberger button -->
-        <button class="navbar-toggler m-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- e : hamberger button -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav m-auto">
-            <li class="nav-item dropdown mx-1">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-                회사소개
-              </a>
-              <ul class="dropdown-menu shadow">
-                <li><a class="dropdown-item" href="/intro/about">인사말</a></li>
-                <li><a class="dropdown-item" href="/intro/team">구성원</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown mx-1">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                서비스
-              </a>
-              <ul class="dropdown-menu shadow">
-                <li><a class="dropdown-item" href="/service/claim">경정청구</a></li>
-                <li><a class="dropdown-item" href="/service/agency">기장/신고</a></li>
-                <li><a class="dropdown-item" href="/service/consulting">컨설팅</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown mx-1">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                세무자료
-              </a>
-              <ul class="dropdown-menu shadow">
-                <li><a class="dropdown-item" href="./boards/news.html">세무뉴스</a></li>
-                <li><a class="dropdown-item" href="./boards/inside.html">세무일정</a></li>
-                <li><a class="dropdown-item" href="./boards/data.html">세무자료</a></li>
-              </ul>
-            </li>
-            <li class="nav-item mx-1">
-              <a class="nav-link" href="/inquiry">
-                상담신청
-              </a>
-            </li>
+<header th:fragment="headerFragment">
+  <nav class="navbar navbar-expand-md">
+    <a class="navbar-brand" href="/">
+      <img src="../images/logo.png" alt="Logo" width="120" height="60" class="d-inline-block">
+      세무스미스
+    </a>
+    <!-- s : hamberger button -->
+    <button class="navbar-toggler m-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- e : hamberger button -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+            회사소개
+          </a>
+          <ul class="dropdown-menu shadow">
+            <li><a class="dropdown-item" href="/intro/about">인사말</a></li>
+            <li><a class="dropdown-item" href="/intro/team">구성원</a></li>
           </ul>
-          <button type="button" class="btn btn-outline-secondary me-5" data-bs-toggle="modal" data-bs-target="#modalLogin">로그인</button>
-        </div>
-      </nav>
-    </header>
-    <!-- e : header nav -->
+        </li>
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            서비스
+          </a>
+          <ul class="dropdown-menu shadow">
+            <li><a class="dropdown-item" href="/service/claim">경정청구</a></li>
+            <li><a class="dropdown-item" href="/service/agency">기장/신고</a></li>
+            <li><a class="dropdown-item" href="/service/consulting">컨설팅</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            세무자료
+          </a>
+          <ul class="dropdown-menu shadow">
+            <li><a class="dropdown-item" href="/boards/news">세무뉴스</a></li>
+            <li><a class="dropdown-item" href="/boards/inside">세무일정</a></li>
+            <li><a class="dropdown-item" href="/boards/data">세무자료</a></li>
+          </ul>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" href="/inquiry">
+            상담신청
+          </a>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-outline-secondary me-5" data-bs-toggle="modal" data-bs-target="#modalLogin">로그인</button>
+    </div>
+  </nav>
+</header>
