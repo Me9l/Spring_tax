@@ -29,22 +29,34 @@ dependencies {
 	// spring starter web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	
+	// dev tool
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+	// junit test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	
-	// dev tool
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	// junit test
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
 	// JPA Lib
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	
+	//Spring validation Lib
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	// H2DB
-//	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.h2database:h2'
+	
 	// JDBC
-//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	
+	// Spring Security Lib
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+	
+	//modelmapper Lib
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
 }
 
 tasks.named('test') {
