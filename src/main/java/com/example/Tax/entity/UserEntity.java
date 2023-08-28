@@ -1,5 +1,9 @@
 package com.example.Tax.entity;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+
 import com.example.Tax.constant.Role;
 
 import jakarta.persistence.Column;
@@ -16,7 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @Table(name = "users")
-public class UserEntity extends BaseTimeEntity{
+public class UserEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +33,12 @@ public class UserEntity extends BaseTimeEntity{
 	
 	@Column(unique = true)
 	private String email;
+	
+	@Column(unique = true)
+	private String tel;
+
+	@CreatedDate
+	private LocalDateTime regdate;
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
