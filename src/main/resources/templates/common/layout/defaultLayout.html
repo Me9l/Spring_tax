@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common/fragments/head::headFragment}">
-</head>
-
+<head th:replace="~{common/fragments/head::headFragment}" />
 <body>
 	
 	<!-- icons Import -->
@@ -20,7 +18,7 @@
 	<th:block th:replace="~{common/fragments/footer::footerFragment}"></th:block>
 	
 	<!-- Login Import -->
-	<th:block th:replace="~{common/fragments/loginForm::loginFragment}"></th:block>
+	<th:block th:replace="~{common/fragments/loginForm::loginFormFragment}"></th:block>
 	
 	<!-- bootstrap JavaScript Import
     <script th:src="@{/bootstrap.min.js}"></script> -->

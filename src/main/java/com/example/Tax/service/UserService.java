@@ -17,11 +17,12 @@ public class UserService {
 	private final PasswordEncoder passwordEncoder;
 	private final UserRepository userRepository;
 	
-	public UserEntity create(String userid, String password, String email) {
+	public UserEntity create(String userid, String password, String email, String tel) {
 		UserEntity user = new UserEntity();
 		user.setUserid(userid);
 		user.setPassword(passwordEncoder.encode(password));
 		user.setEmail(email);
+		user.setTel(tel);
 		LocalDateTime date = LocalDateTime.now();
 		user.setRegdate(date);
 		

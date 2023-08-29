@@ -12,22 +12,30 @@
               <h4 class="fw-bold mb-0 fs-2 text-center">TAX-SMITH</h4>
             </div>
             <div class="p-3 pt-0">
-              <form class="" action="" method="" id="formWrap">
+              <form class="" th:action="@{/user/signup}" method="POST" id="formWrap">
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                <input type="text" class="form-control rounded-3" id="floatingName" placeholder="Name">
-                <label for="floatingName">아이디 *</label>
+                <input type="text" class="form-control rounded-3" id="floatingId" placeholder="Name">
+                <label for="floatingId">아이디 *</label>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                  <input type="email" class="form-control rounded-3" id="floatingEmail" placeholder="email@example.com">
-                  <label for="floatingEmail">이메일 주소 *</label>
+                <input type="text" class="form-control rounded-3" id="floatingPw1" placeholder="Name">
+                <label for="floatingPw1">비밀번호 *</label>
+                </div>
+                <div class="col-md-10 form-floating mb-3 m-auto">
+                <input type="text" class="form-control rounded-3" id="floatingPw2" placeholder="Name">
+                <label for="floatingPw2">비밀번호 확인 *</label>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
                 <input type="text" class="form-control rounded-3" id="floatingName" placeholder="Name">
                 <label for="floatingName">이름 (본명) *</label>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                  <input type="text" class="form-control rounded-3" id="floatingMobile" placeholder="Mobile number">
-                  <label for="floatingMobile">휴대전화번호 *</label>
+                  <input type="email" class="form-control rounded-3" id="floatingEmail" placeholder="email@example.com">
+                  <label for="floatingEmail">이메일 주소 *</label>
+                </div>
+                <div class="col-md-10 form-floating mb-3 m-auto">
+                  <input type="text" class="form-control rounded-3" id="floatingTel" placeholder="Mobile number">
+                  <label for="floatingTel">휴대전화번호 *</label>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select">
