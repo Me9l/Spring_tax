@@ -9,19 +9,16 @@
 	<!-- header Import -->
 	<th:block th:replace="~{common/fragments/header::headerFragment}"></th:block>
 	
-	<div class="container-xxl m-0 p-0 m-auto">
 	<!-- content Import -->
+	<div class="container-xxl m-0 p-0 m-auto">
 	<th:block layout:fragment="content"></th:block>
-	
 	</div>
+
 	<!-- footer Import -->
 	<th:block th:replace="~{common/fragments/footer::footerFragment}"></th:block>
 	
 	<!-- Login Import -->
 	<th:block th:replace="~{common/fragments/loginForm::loginFormFragment}"></th:block>
-	
-	<!-- bootstrap JavaScript Import
-    <script th:src="@{/bootstrap.min.js}"></script> -->
 
 	<!-- custom script Import  -->
     <th:block layout:fragment="script"></th:block>

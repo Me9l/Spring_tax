@@ -1,5 +1,6 @@
 package com.example.Tax.entity;
 
+import groovy.transform.ToString;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @Table(name = "users")
+@ToString
 public class UserEntity extends BaseTimeEntity{
 
 	@Id
@@ -30,5 +32,7 @@ public class UserEntity extends BaseTimeEntity{
 	
 	@Column(unique = true)
 	private String tel;
+
+	private String purpose;
 	
 }
