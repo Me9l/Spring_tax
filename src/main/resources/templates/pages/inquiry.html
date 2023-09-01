@@ -16,7 +16,7 @@
               <h4 class="fw-bold mb-0 fs-2 text-center">TAX-SMITH</h4>
             </div>
             <div class="p-3 pt-0">
-              <form class="" action="" method="" id="formWrap">
+              <form>
                 <div class="col-md-10 form-floating mb-3 m-auto">
                 <input type="text" class="form-control rounded-3" id="floatingName" placeholder="Name">
                 <label for="floatingName">이름 (본명) *</label>
@@ -26,8 +26,8 @@
                   <label for="floatingMobile">휴대전화번호 *</label>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                  <input type="email" class="form-control rounded-3" id="floatingEmail" placeholder="name@example.com">
-                  <label for="floatingEmail">이메일 주소 *</label>
+                  <input type="email" class="form-control rounded-3" id="email" placeholder="name@example.com">
+                  <label for="email">이메일 주소 *</label>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select">
@@ -93,8 +93,6 @@ const agreements = {
   privacy : false,
   marketing : false,
 };
-
-form.addEventListener('submit',(e)=>e.preventDefault());
 
 checkBox.forEach((item)=>item.addEventListener('input',toggleCheckBox));
 

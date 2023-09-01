@@ -14,12 +14,15 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.Tax.service.UserService;
+import com.example.Tax.service.UserSecurityService;
 
+@EnableWebSecurity
 @EnableMethodSecurity
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	UserSecurityService userSecurityService;
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -28,6 +31,7 @@ public class SecurityConfig {
 		.authorizeHttpRequests(
 				(authorizeHttpRequests) -> authorizeHttpRequests
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
 				)
 		.csrf(
 				(csrf) -> csrf
@@ -37,6 +41,18 @@ public class SecurityConfig {
 				(headers)-> headers
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(
 						XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+				)
+		.formLogin(
+				(formLogin) -> formLogin
+				.loginPage("/user/login")
+				.usernameParameter("email")
+				.defaultSuccessUrl("/")
+				)
+		.logout(
+				(logout) -> logout
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(true)
 				);
 		return http.build();
 	}
@@ -46,9 +62,10 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
-//	@Bean
-//	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-//		return authenticationConfiguration.getAuthenticationManager();
-//	}
-	
+	// 인증 처리하는 객체의 Bean 등록
+	// UserSecurityService.java 를 위한 bean 등록
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
 }

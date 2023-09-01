@@ -1,29 +1,32 @@
 <div th:fragment="loginFragment" class="modal-body p-5 pt-0">
-	<form class="">
+	<form action="/user/login" method="post">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">ID / Email address</label>
+          <input type="email" class="form-control rounded-3" name="email" placeholder="name@example.com">
+          <label> Email address </label>
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
+          <input type="password" class="form-control rounded-3" name="password" placeholder="Password">
+          <label>Password</label>
         </div>
+        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">로그인</button>
-        <a class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" href="/user/signup">회원가입</a>
-        <small class="text-body-secondary"></small>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+  	</form>
+  	<div>
+      <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" onclick="location.href='../user/signup'">회원가입</button>
         <hr class="my-3">
         <h2 class="fs-5 fw-bold mb-3">소셜 계정으로 로그인</h2>
-        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="button">
           <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
           Sign up with Twitter
         </button>
-        <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
+        <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="button">
           <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"/></svg>
           Sign up with Facebook
         </button>
-        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="button">
           <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"/></svg>
           Sign up with GitHub
         </button>
-  	</form>
+	  </div>
 </div>

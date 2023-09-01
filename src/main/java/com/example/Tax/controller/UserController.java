@@ -1,13 +1,16 @@
 package com.example.Tax.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.Tax.dto.UserForm;
-import com.example.Tax.service.UserService;
+import com.example.Tax.entity.UserEntity;
+import com.example.Tax.service.UserSecurityService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,31 +20,30 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserController {
 
-	private final UserService userService;
+	private final UserSecurityService userSecurityService;
+	private final PasswordEncoder passwordEncoder;
 	
+	// 회원가입 페이지 이동
 	@GetMapping("/signup")
-	public String signUp(UserForm userForm) {
+	public String signUp(Model model) {
+		model.addAttribute("userForm", new UserForm());
 		return "common/fragments/signup";
 	}
-
+	
+	// 회원가입 요청
 	@PostMapping("/signup")
-	public String signUp(@Valid UserForm userForm, BindingResult bindingResult) {
+	public String signUp(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
 		if ( bindingResult.hasErrors() ) {
 			return "common/fragments/signup";
 		}
-		if ( !userForm.getPassword1().equals(userForm.getPassword2()) ) {
-			bindingResult.rejectValue("password2", "passwordInCorrect", "비밀번호가 일치하지 않습니다.");
-			return "common/fragments/signup";
-		}
+		
 		try {
-			userService.saveUser(userForm);
-			} catch (Exception e) {
-				e.printStackTrace();
-				bindingResult.reject("signUpFailed","이미 등록된 아이디 입니다.");
-				bindingResult.reject("signUpFailed",e.getMessage());
+			UserEntity user = UserEntity.createUser(userForm, passwordEncoder);
+			userSecurityService.saveUser(user);
+			} catch (IllegalStateException e) {
+				model.addAttribute("errorMessage",e.getMessage());
 				return "common/fragments/signup";
 			}
 		return "redirect:/";
-		
 	}
 }

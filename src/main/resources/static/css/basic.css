@@ -1,6 +1,9 @@
 @charset "UTF-8";
-
 /* S : Global CSS */
+* {
+	font-family: 'Noto Serif KR', serif;
+}
+
 #btn-to-top {
   position: fixed;
   bottom: 6rem;
