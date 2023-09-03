@@ -16,35 +16,39 @@
               <h4 class="fw-bold mb-0 fs-2 text-center">TAX-SMITH</h4>
             </div>
             <div class="p-3 pt-0">
-              <form>
+              <form th:action="@{/service/inquire}" th:object="${inquireForm}" method="post">
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                <input type="text" class="form-control rounded-3" id="floatingName" placeholder="Name">
-                <label for="floatingName">이름 (본명) *</label>
+                <input type="text" th:field="*{username}" class="form-control rounded-3" placeholder="Name">
+                <label for="userame">이름 (본명) *</label>
+                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red;"></small>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                  <input type="text" class="form-control rounded-3" id="floatingMobile" placeholder="Mobile Number">
-                  <label for="floatingMobile">휴대전화번호 *</label>
+                  <input type="text" th:field="*{tel}" class="form-control rounded-3" placeholder="Mobile Number">
+                  <label for="tel">휴대전화번호 *</label>
+                  <small th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" style="color: red;"></small>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                  <input type="email" class="form-control rounded-3" id="email" placeholder="name@example.com">
+                  <input type="email" th:field="*{email}" class="form-control rounded-3" placeholder="name@example.com">
                   <label for="email">이메일 주소 *</label>
+                  <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></small>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select">
+                    <select th:field="*{purpose}" class="form-select" aria-label="Floating label select">
                       <option selected value="taxRefund">세금환급</option>
                       <option value="claim">기장/신고 대리</option>
                       <option value="consulting">컨설팅</option>
                       <option value="etcs">기타</option>
                     </select>
-                    <label for="floatingSelect">상담유형 선택</label>
+                    <label for="purpose">상담유형 선택</label>
                   </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">상담내용 *</label>
+                    <textarea th:field="*{content}" class="form-control" placeholder="Leave a comment here" style="height: 100px" maxlength="200"></textarea>
+                    <label for="content">상담내용 *</label>
+                    <small th:if="${#fields.hasErrors('content')}" th:errors="*{content}" style="color: red;"></small>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                    <input type="text" class="form-control rounded-3" id="sector" placeholder="name@example.com">
-                    <label for="sector">업종 입력 (선택)</label>
+                    <input th:field="*{sectors}" type="text" class="form-control rounded-3" id="sectors" placeholder="name@example.com" maxlength="30">
+                    <label for="sectors">업종 입력 (선택)</label>
                   </div>
                 <hr class="my-3">
                 <div class="col-md-10 form-check mb-3 m-auto">
@@ -60,7 +64,7 @@
                   </label>
                 </div>
                 <div class="col-md-10 form-check mb-3 m-auto">
-                  <input class="form-check-input" type="checkbox" value="" id="marketing">
+                  <input th:field="*{optin}" class="form-check-input" type="checkbox" value="true" id="marketing">
                   <label class="form-check-label" for="marketing">
                     [선택] 마케팅 정보 수신에 동의합니다.
                   </label>

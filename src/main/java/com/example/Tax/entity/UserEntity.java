@@ -26,6 +26,7 @@ import lombok.Setter;
 public class UserEntity extends BaseTimeEntity{
 
 	@Id
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 		
@@ -36,7 +37,6 @@ public class UserEntity extends BaseTimeEntity{
 	
 	private String password;
 	
-	@Column(unique = true)
 	private String tel;
 
 	private String purpose;
