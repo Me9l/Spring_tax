@@ -1,5 +1,7 @@
 package com.example.Tax.service;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,9 +13,7 @@ import com.example.Tax.entity.UserEntity;
 import com.example.Tax.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -27,23 +27,31 @@ public class UserSecurityService implements UserDetailsService{
 	}
 
 	private void validateDuplicateUser(UserEntity userEntity) {
-		UserEntity findUser = userRepository.findByEmail(userEntity.getEmail());
-		if(findUser != null) {
+		Optional<UserEntity> findUser = userRepository.findByEmail(userEntity.getEmail());
+		if(findUser.isPresent()) {
 			throw new IllegalStateException("가입된 회원입니다.");
 		}
 	}
 	
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		try {
-			UserEntity user = userRepository.findByEmail(email);
-			log.info("user.getEmail() : " + user.getEmail());
+			Optional<UserEntity> user = userRepository.findByEmail(email);
+
 			return User.builder()
-					.username(user.getEmail())
-					.password(user.getPassword())
-					.roles(user.getRole().toString())
+					.username(user.get().getEmail())
+					.password(user.get().getPassword())
+					.roles(user.get().getRole().toString())
 					.build();
 		} catch (Exception e) {
 			throw new UsernameNotFoundException(email);
 		}
+	}
+
+	public boolean alreadyTakenEmail(String email) {
+		Optional<UserEntity> user = userRepository.findByEmail(email);
+		if (user.isPresent()) {
+			return user != null;
+		}
+		return true;
 	}
 }

@@ -33,17 +33,23 @@ public class UserController {
 	// 회원가입 요청
 	@PostMapping("/signup")
 	public String signUp(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
+
 		if ( bindingResult.hasErrors() ) {
 			return "common/fragments/signup";
+		}
+		
+		if (userSecurityService.alreadyTakenEmail(userForm.getUsername())) {
+			 bindingResult.rejectValue("email", "error.email", "이미 가입된 이메일입니다.");
 		}
 		
 		try {
 			UserEntity user = UserEntity.createUser(userForm, passwordEncoder);
 			userSecurityService.saveUser(user);
 			} catch (IllegalStateException e) {
-				model.addAttribute("errorMessage",e.getMessage());
+				model.addAttribute("errorMessage", e.getMessage());
 				return "common/fragments/signup";
 			}
+		
 		return "redirect:/";
 	}
 }

@@ -147,6 +147,15 @@ checkAll.addEventListener('click', (e)=> {
 // E : Agreements
 </script>
 
+<script th:inline="javascript">
+         document.addEventListener("DOMContentLoaded", function() {
+            var errorMessage = /*[[${errorMessage}]]*/ null;
+            if(errorMessage != null){
+                alert(errorMessage);
+            }
+        });
+</script>
+    
     </main>
 
     <!-- e: main area -->
