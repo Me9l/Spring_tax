@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @Table(name = "board")
-public class boardEntity extends BaseTimeEntity {
+public class BoardEntity extends BaseTimeEntity {
 
 	@Id
 	@Column(name="board_id")
@@ -25,8 +25,11 @@ public class boardEntity extends BaseTimeEntity {
 	@Column(nullable = false, length=100)
 	private String title;
 
-	@Column(nullable = false, length=500)
+	@Column(columnDefinition = "Text", nullable = false, length=500)
 	private String content;
+	
+	@Column(nullable = false)
+	private String category;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")

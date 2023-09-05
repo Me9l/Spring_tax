@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.Tax.entity.UserEntity;
+import com.example.Tax.exception.DataNotFoundException;
 import com.example.Tax.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,16 @@ public class UserSecurityService implements UserDetailsService{
 			return user != null;
 		}
 		return true;
+	}
+	
+	// email을 받아 db에서 조회
+	public UserEntity getUser(String email) {
+		
+		Optional<UserEntity> _user = userRepository.findByEmail(email);
+		if ( _user.isPresent() ) {
+			return _user.get();
+		} else {
+			throw new DataNotFoundException("찾을수 없는 이메일 : " + email);
+		}
 	}
 }

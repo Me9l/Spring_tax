@@ -7,7 +7,7 @@
 //
 //@Entity
 //@Getter @Setter
-//@Table(name = "reply")
-//public class ReplyEntity {
+//@Table(name = "question")
+//public class QuestionEntity {
 //
 //}
