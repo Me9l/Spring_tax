@@ -18,7 +18,7 @@
             <div class="p-3 pt-0">
               <form th:action="@{/service/inquire}" th:object="${inquireForm}" method="post">
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                  <input type="email"  th:value="${email}" id="email" name="email" class="form-control rounded-3" placeholder="name@example.com">
+                  <input type="email" th:value="${email}" id="email" name="email" class="form-control rounded-3" placeholder="name@example.com">
                   <label for="email">이메일 주소 *</label>
                   <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></small>
                 </div>

@@ -1,5 +1,7 @@
 package com.example.Tax.controller;
 
+import java.security.Principal;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,7 +41,7 @@ public class ServController {
 	}
 	
 	@GetMapping("/inquire")
-	public String inquire(InquireForm inquireForm, Model model) {
+	public String inquire(InquireForm inquireForm, Model model, Principal principal) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		String email = authentication.getName();

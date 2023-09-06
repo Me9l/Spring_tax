@@ -7,8 +7,7 @@
           <h4 class="fw-bold">세무 자료 입력</h4>
         </div>
         <div class="rounded-4 shadow col-md-8 p-4 py-md-5">
-    	<form th:action="@{/boards/post}" th:object="${boardForm}" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    	<form th:action="@{/admin/post}" th:object="${boardForm}" method="post">
 		<div class="d-flex">
 		<div class="col-8 form-floating mb-3 m-auto">
       		<input type="text" id="title" name="title" class="form-control rounded-3">

@@ -1,7 +1,9 @@
 package com.example.Tax.controller;
 
 import java.security.Principal;
+import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Tax.dto.BoardForm;
+import com.example.Tax.entity.BoardEntity;
 import com.example.Tax.entity.UserEntity;
 import com.example.Tax.service.BoardService;
 import com.example.Tax.service.UserSecurityService;
@@ -31,19 +35,33 @@ public class adminController {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping
-	public String admin() {
+	public String admin(Model model) {
 		return "pages/admin/adminMenu";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admininquire")
-	public String inquire() {
+	public String inquire(
+			Model model,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword
+			) {
+		Page<BoardEntity> paging = boardService.getBoardList(page, keyword);
+		model.addAttribute("paging", paging);
+		model.addAttribute("keyword", keyword);
 		return "pages/admin/adminInquire";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admindata")
-	public String data() {
+	public String data(
+			Model model,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword
+			) {
+		Page<BoardEntity> paging = boardService.getBoardList(page, keyword);
+		model.addAttribute("paging", paging);
+		model.addAttribute("keyword", keyword);
 		return "pages/admin/adminData";
 	}
 	
@@ -72,7 +90,7 @@ public class adminController {
 		}
 			UserEntity user = userSecurityService.getUser(principal.getName());
 			boardService.saveBoard(boardForm.getTitle(),boardForm.getContent(),boardForm.getCategory(),user);
-		return "redirect:/boards/news";
+		return "redirect:/admin/admindata";
 	}
 	
 	@ExceptionHandler(AccessDeniedException.class)

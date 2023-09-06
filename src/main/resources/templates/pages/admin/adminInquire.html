@@ -8,48 +8,56 @@
         </div>
         <div class="rounded-4 shadow col-md-8 p-4 py-md-5">
     	
-    	      <div class="container">
+    	<div class="container">
 		  
         <table class="table caption-top">
-          <caption>상담 내역</caption>
+          <caption>상담 목록</caption>
+          
           <thead>
             <tr>
-              <th style="text-align: center;" scope="col">No</th>
-              <th scope="col">제목</th>
-              <th style="text-align: center;" scope="col">작성일</th>
-              <th style="text-align: center;" scope="col">작성자</th>
+              <th style="text-align:center;" scope="col">No</th>
+              <th style="text-align:center;" scope="col">제목</th>
+              <th style="text-align:center;" scope="col">작성일</th>
+              <th style="text-align:center;" scope="col">작성자</th>
             </tr>
           </thead>
+          
           <tbody>
-            <tr>
-              <td style="text-align: center;" scope="row">1</td>
-              <td>
-				  <a href="#">
-				  새로운 세무소식을 확인하세요.
-				  </a>
+            <tr th:each="board , loop : ${paging}">
+              <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}" style="text-align: center;" scope="row"></td>
+              <td class="w-50">
+				  <a th:text="${board.title}"> th:href="@{|/board/detail/${board.board_id}|}" </a>
 			  </td>
-              <td style="text-align: center;" >2023-06-25</td>
-              <td style="text-align: center;" >관리자</td>
+              <td th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm')}" style="text-align: center;"></td>
+              <td th:text="${board.user.id}" style="text-align:center;"></td>
             </tr>
           </tbody>
+          
         </table>
-        <div class="d-flex justify-content-center">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Previous">
+        
+        <div th:if="${!paging.isEmpty()}">
+          <ul class="pagination d-flex justify-content-center">
+            <li th:classappend="${!paging.hasPrevious} ? 'disabled'" class="page-item">
+              <a th:href="@{|?page=${paging.number-1}|}" class="page-link text-dark" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Next">
+            
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            	th:if="${page >= paging.number-5 and page <= paging.number+5 }"
+                th:classappend="${page == paging.number} ? 'active'" 
+                class="page-item">
+                <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            </li>
+            
+            <li th:classappend="${!paging.hasNext} ? 'disabled'" class="page-item">
+              <a th:href="@{|?page=${paging.number+1}|}" class="page-link text-dark" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
           </ul>
       </div>
+
       </div>
     	
       	</div>
