@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{common/fragments/head::headFragment}" />
+<body>
+	
+	<!-- icons Import -->
+	<th:block th:replace="~{common/fragments/icons::iconsFragment}"></th:block>
+	
+	<!-- header Import -->
+	<th:block th:replace="~{common/fragments/header::headerFragment}"></th:block>
+	
+	<!-- Admin Menu Import -->
+	<th:block th:replace="~{pages/admin/adminMenu::adminMenu}"></th:block>
+
+	<!-- content Import -->
+	<div class="container-xxl m-0 p-0 m-auto">
+	<th:block layout:fragment="adminContent"></th:block>
+	</div>
+	
+	<!-- footer Import -->
+	<th:block th:replace="~{common/fragments/footer::footerFragment}"></th:block>
+	
+</body>
+
+</html>
