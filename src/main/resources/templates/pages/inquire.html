@@ -23,7 +23,7 @@
                   <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></small>
                 </div>
                 <div class="col-md-10 form-floating mb-3 m-auto">
-                <input type="text" th:value="${username}" class="form-control rounded-3" placeholder="Name">
+                <input type="text" th:value="${username}" id="username" name="username" class="form-control rounded-3" placeholder="Name">
                 <label for="username">이름 (본명) *</label>
                 <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red;"></small>
                 </div>

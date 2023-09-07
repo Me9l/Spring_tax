@@ -41,7 +41,7 @@ public class ServController {
 	}
 	
 	@GetMapping("/inquire")
-	public String inquire(InquireForm inquireForm, Model model, Principal principal) {
+	public String inquire(InquireForm inquireForm, Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		String email = authentication.getName();
