@@ -3,16 +3,18 @@
 	<main layout:fragment="adminContent">
 		
       <div class="row justify-content-center mb-5">
-        <div class="text-center col-md-8 p-4 py-md-5">
+        <div class="text-center col-md-8 p-4 py-md-4">
           <h4 class="fw-bold"> 상담 관리 </h4>
+         	 <div class="input-group">
+				<input type="text" id="search_keyword" class="form-control" th:value="${keyword}"> 
+				<button id ="search_btn" class="btn btn-outline-secondary" type="button">검색</button>
+			 </div>
         </div>
         <div class="rounded-4 shadow col-md-8 p-4 py-md-5">
-    	
     	<div class="container">
 		  
         <table class="table caption-top">
           <caption>상담 목록</caption>
-          
           <thead>
             <tr>
               <th style="text-align:center;" scope="col">No</th>
@@ -60,8 +62,33 @@
 
       </div>
     	
+    	<form th:action="@{/admin/admininquire}" method="get" id="searchForm">
+			<input type="hidden" id="keyword" name="keyword" th:value="${keyword}">
+			<input type="hidden" id="page" name="page" th:value="${paging.number}">
+		</form>
+    	
       	</div>
-      </div>
+      	
+	<script layout:fragment="script" type="text/javascript">
+	// 검색 기능
+	const btn_search = document.getElementById("search_btn");
+		btn_search.addEventListener('click', function() {
+	    document.getElementById('keyword').value = document.getElementById('search_keyword').value;
+	    document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+	    document.getElementById('searchForm').submit();
+	});
+	
+	// 페이징 기능
+	const page_elements = document.getElementsByClassName('page-link');
+	Array.from(page_elements).forEach(function(element){
+		element.addEventListener('click', function(){
+		document.getElementById('page').value = this.dataset.page;
+		document.getElementById('searchForm').submit();
+		});
+	});
+	</script>
+	
+    </div>
       
 	</main>
     <!-- e: main area -->

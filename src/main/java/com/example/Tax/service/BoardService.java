@@ -43,4 +43,14 @@ public class BoardService {
 		Page<BoardEntity> board = boardRepository.findAllByKeyword(keyword, pageable);
 		return board;
 	}
+	
+	//board paging 조회
+	public Page<BoardEntity> getBoardByCategory(int page, String category) {
+		List<Sort.Order> sort = new ArrayList<>();
+		sort.add(Sort.Order.desc("regdate"));
+		Pageable pageable = PageRequest.of(page, 5,Sort.by(sort));
+		Page<BoardEntity> board = boardRepository.findByCategory(category, pageable);
+		System.out.println(board.getSize());
+		return board;
+	}
 }

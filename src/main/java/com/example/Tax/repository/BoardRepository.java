@@ -12,7 +12,7 @@ import com.example.Tax.entity.BoardEntity;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
 
-	List<BoardEntity> findByCategoryLikeOrderByRegdateDesc(String category);
+	Page<BoardEntity> findByCategory(String category, Pageable pageable);
 
 	List<BoardEntity> findAllByOrderByRegdateDesc();
 
