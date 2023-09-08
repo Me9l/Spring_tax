@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -24,6 +23,8 @@ public class SecurityConfig {
 	
 	@Autowired
 	UserSecurityService userSecurityService;
+	@Autowired
+	private CustomAuthFailureHandler customAuthFailureHandler;
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,6 +34,7 @@ public class SecurityConfig {
 				(authorizeHttpRequests) -> authorizeHttpRequests
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
+				.anyRequest().authenticated()
 				)
 		.csrf(
 				(csrf) -> csrf
@@ -48,7 +50,7 @@ public class SecurityConfig {
 				.loginPage("/user/login")
 				.usernameParameter("email")
 				.defaultSuccessUrl("/")
-				.failureUrl("/")
+				.failureHandler(customAuthFailureHandler)
 				)
 		.logout(
 				(logout) -> logout

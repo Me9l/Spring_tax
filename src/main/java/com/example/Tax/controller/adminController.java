@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Tax.dto.BoardForm;
 import com.example.Tax.entity.BoardEntity;
+import com.example.Tax.entity.InquireEntity;
 import com.example.Tax.entity.UserEntity;
 import com.example.Tax.service.BoardService;
+import com.example.Tax.service.InquireService;
 import com.example.Tax.service.UserSecurityService;
 
 import jakarta.validation.Valid;
@@ -30,8 +32,8 @@ import lombok.RequiredArgsConstructor;
 public class adminController {
 
 	private final BoardService boardService;
+	private final InquireService inquireService;
 	private final UserSecurityService userSecurityService;
-
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping
@@ -46,7 +48,7 @@ public class adminController {
 			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword
 			) {
-		Page<BoardEntity> paging = boardService.getBoardList(page, keyword);
+		Page<InquireEntity> paging = inquireService.getInquireList(page, keyword);
 		model.addAttribute("paging", paging);
 		model.addAttribute("keyword", keyword);
 		return "pages/admin/adminInquire";
@@ -67,7 +69,14 @@ public class adminController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/adminuser")
-	public String userData() {
+	public String userData(
+			Model model,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword
+			) {
+		Page<UserEntity> paging = userSecurityService.getAllUsers(page, keyword);
+		model.addAttribute("paging",paging);
+		model.addAttribute("keyword",keyword);
 		return "pages/admin/adminuser";
 	}
 	
@@ -98,4 +107,5 @@ public class adminController {
 		return "redirect:/";
 	}
 
+	
 }

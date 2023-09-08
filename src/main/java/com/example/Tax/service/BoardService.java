@@ -40,7 +40,7 @@ public class BoardService {
 		List<Sort.Order> sort = new ArrayList<>();
 		sort.add(Sort.Order.desc("regdate"));
 		Pageable pageable = PageRequest.of(page, 5,Sort.by(sort));
-		Page<BoardEntity> board = boardRepository.findAllByKeyword(keyword, pageable);
+		Page<BoardEntity> board = boardRepository.findByKeyword(keyword, pageable);
 		return board;
 	}
 	

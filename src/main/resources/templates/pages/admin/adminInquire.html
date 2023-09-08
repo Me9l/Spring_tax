@@ -6,7 +6,7 @@
         <div class="text-center col-md-8 p-4 py-md-4">
           <h4 class="fw-bold"> 상담 관리 </h4>
          	 <div class="input-group">
-				<input type="text" id="search_keyword" class="form-control" th:value="${keyword}"> 
+				<input type="text" id="search_keyword" class="form-control" th:value="${keyword}" onkeydown="if (event.keyCode === 13) search()"> 
 				<button id ="search_btn" class="btn btn-outline-secondary" type="button">검색</button>
 			 </div>
         </div>
@@ -14,24 +14,26 @@
     	<div class="container">
 		  
         <table class="table caption-top">
-          <caption>상담 목록</caption>
+          <caption>총 상담 수 : <small th:text="${paging.getTotalElements}"></small></caption>
           <thead>
             <tr>
               <th style="text-align:center;" scope="col">No</th>
-              <th style="text-align:center;" scope="col">제목</th>
-              <th style="text-align:center;" scope="col">작성일</th>
               <th style="text-align:center;" scope="col">작성자</th>
+              <th style="text-align:center;" scope="col">내용</th>
+              <th style="text-align:center;" scope="col">상담유형</th>
+              <th style="text-align:center;" scope="col">작성일</th>
             </tr>
           </thead>
           
           <tbody>
-            <tr th:each="board , loop : ${paging}">
+            <tr th:each="i , loop : ${paging}">
               <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}" style="text-align: center;" scope="row"></td>
+              <td th:text="${i.username}" style="text-align:center;"></td>
               <td class="w-50">
-				  <a th:text="${board.title}"> th:href="@{|/board/detail/${board.board_id}|}" </a>
+				  <a th:text="${#strings.length(i.content) > 15 ? #strings.substring(i.content, 0, 15) + '...' : i.content}"></a>
 			  </td>
-              <td th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm')}" style="text-align: center;"></td>
-              <td th:text="${board.user.id}" style="text-align:center;"></td>
+              <td th:text="${i.purpose == 'taxRefund' ? '세금환급' : (i.purpose == 'claim' ? '기장/신고' : (i.purpose == 'consulting' ? '컨설팅' : '기타'))}" style="text-align:center;"></td>
+              <td th:text="${#temporals.format(i.regdate, 'yy-MM-dd HH:mm')}" style="text-align: center;"></td>
             </tr>
           </tbody>
           
@@ -78,6 +80,12 @@
 	    document.getElementById('searchForm').submit();
 	});
 	
+	function search() {
+        document.getElementById('keyword').value = document.getElementById('search_keyword').value;
+        document.getElementById('page').value = 0;
+        document.getElementById('searchForm').submit();
+    }
+    
 	// 페이징 기능
 	const page_elements = document.getElementsByClassName('page-link');
 	Array.from(page_elements).forEach(function(element){

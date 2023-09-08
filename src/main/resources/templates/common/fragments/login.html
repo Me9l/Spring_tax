@@ -1,5 +1,6 @@
 <div th:fragment="loginFragment" class="modal-body p-5 pt-0">
-	<form action="/user/login" method="post">
+	<form id="loginForm" action="/user/login" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <div class="form-floating mb-3">
           <input type="email" class="form-control rounded-3" name="email" placeholder="name@example.com">
           <label> Email address </label>
@@ -8,9 +9,9 @@
           <input type="password" class="form-control rounded-3" name="password" placeholder="Password">
           <label>Password</label>
         </div>
-        <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+		<div id="errorMessage" class="alert alert-danger" role="alert" style="display: none;">
+		</div>
         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary bg-gradient" type="submit">로그인</button>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
   	</form>
   	<div>
       <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary bg-gradient" onclick="location.href='../user/signup'">회원가입</button>
@@ -25,4 +26,33 @@
           Sign up with Google
         </button>
 	  </div>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("loginForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/user/login", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // 로그인 성공 시 리다이렉션 또는 다음 단계 수행
+                            window.location.href = "/";
+                        } else {
+                            // 로그인 실패 시 에러 메시지 표시
+							var response = JSON.parse(xhr.responseText);
+                            var errorMessage = response.errorMessage;
+                            var errorMessageElement = document.getElementById("errorMessage");
+                            errorMessageElement.textContent = errorMessage;
+                            errorMessageElement.style.display = "block";
+                        }
+                    }
+                };
+                xhr.send(new URLSearchParams(formData));
+            });
+        });
+    </script>
 </div>

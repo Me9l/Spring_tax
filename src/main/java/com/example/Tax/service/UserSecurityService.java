@@ -1,7 +1,13 @@
 package com.example.Tax.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -54,6 +60,15 @@ public class UserSecurityService implements UserDetailsService{
 			return user != null;
 		}
 		return true;
+	}
+	
+	// 모든 유저 조회
+	public Page<UserEntity> getAllUsers(int page, String keyword) {
+		List<Sort.Order> sort = new ArrayList<>();
+		sort.add(Sort.Order.desc("regdate"));
+		Pageable pageable = PageRequest.of(page, 5,Sort.by(sort));
+		Page<UserEntity> users = userRepository.findAll(pageable);
+		return users;
 	}
 	
 	// email을 받아 db에서 조회
