@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.example.Tax.entity.InquireEntity;
 import com.example.Tax.entity.UserEntity;
@@ -33,5 +34,10 @@ public class InquireService {
 		Page<InquireEntity> inquire = inquireRepository.findByKeyword(keyword, pageable);
 
 		return inquire;
+	}
+	
+	public InquireEntity getInquireDetail(Long id) {
+		return inquireRepository.findById(id)
+				.orElseThrow(()-> new RuntimeException("요청 상담을 찾을 수 없습니다."));
 	}
 }

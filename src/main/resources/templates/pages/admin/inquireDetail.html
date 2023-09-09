@@ -1,0 +1,51 @@
+<div layout:decorate="~{common/layout/adminLayout}">
+	
+	<main layout:fragment="adminContent">
+
+		<div class="row justify-content-center mb-5">
+			<div class="rounded-4 shadow col-md-8 p-4 py-md-5">
+				<div class="container">
+					<table class="table caption-top">
+						<caption>상담 내용</caption>
+						<thead>
+							<tr>
+								<th style="text-align:center;">No</th>
+								<td style="text-align:center;" th:text="${inquire.id}">번호</td>
+								<th style="text-align:center;">상담유형</th>
+								<td style="text-align:center;"
+									th:text="${inquire.purpose == 'taxRefund' ? '세금환급' : (inquire.purpose == 'claim' ? '기장/신고' : (inquire.purpose == 'consulting' ? '컨설팅' : '기타'))}">
+									유형</td>
+								<th style="text-align:center;">작성일</th>
+								<td style="text-align:center;"
+									th:text="${#temporals.format(inquire.regdate, 'yy-MM-dd HH:mm:ss')}">작성일</td>
+							</tr>
+							<tr>
+								<th style="text-align:center;">작성자</th>
+								<td style="text-align:center;" colspan="2" th:text="${inquire.username}">작성자이름</td>
+								<th style="text-align:center;">이메일</th>
+								<td style="text-align:center;" colspan="2" th:text="${inquire.email}">메일주소</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="text-align:center;">내용</td>
+								<td th:text="${inquire.content}" colspan="5">aaaaaaaaaaaa</td>
+							</tr>
+							<tr>
+								<th style="text-align:center;">상태</th>
+								<td style="text-align:center;" colspan="2" th:text="${inquire.settle} ? '상담완료' : '상담전'"></td>
+								<th style="text-align:center;">선택 정보 동의</th>
+								<td style="text-align:center;" colspan="2" th:text="${inquire.optin} ? '동의' : '미동의'"></td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<button>답변</button>
+						<button>뒤로</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+</div>

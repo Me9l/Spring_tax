@@ -1,44 +1,45 @@
- <div layout:decorate="~{common/layout/adminlayout}">
-    <!-- s : main area -->
-    <main th:fragment="adminMenu">
+<div layout:decorate="~{common/layout/adminlayout}">
+	<!-- s : main area -->
+	<main th:fragment="adminMenu">
 
-	<div>
-      <div class="row justify-content-center">
-	      <div class="col-md-6 p-4 py-md-4">
-	          <div class="rounded-4 shadow p-3 pb-3">
-	              <h4 class="fw-bold mb-0 fs-2 text-center"> PAGE FOR ADMIN </h4>
-	          </div>
-	      </div>
-      </div>
-      
-    <div class="container my-2">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
-            <li class="breadcrumb-item">
-      			<a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/admininquire">
-				상담관리
-				</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/admindata">
-                자료관리
-              </a>
-            </li>
-            <li class="breadcrumb-item">
-              <a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/post">
-                자료입력
-              </a>
-            </li>
-            <li class="breadcrumb-item">
-              <a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/adminuser">
-                회원관리
-              </a>
-            </li>
-          </ol>
-        </nav>
-      </div>
-	</div>
-	
-    </main>
-    <!-- e: main area -->
+		<div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 p-4 py-md-4">
+					<div class="rounded-4 shadow p-3 pb-3">
+						<h4 class="fw-bold mb-0 fs-2 text-center"> PAGE FOR ADMIN </h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="container my-2">
+				<nav aria-label="breadcrumb">
+					<ol
+						class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+						<li class="breadcrumb-item">
+							<a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/admininquire">
+								상담관리
+							</a>
+						</li>
+						<li class="breadcrumb-item">
+							<a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/data">
+								자료관리
+							</a>
+						</li>
+						<li class="breadcrumb-item">
+							<a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/post">
+								자료입력
+							</a>
+						</li>
+						<li class="breadcrumb-item">
+							<a class="link-body-emphasis fw-semibold text-decoration-none" href="/admin/adminuser">
+								회원관리
+							</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+
+	</main>
+	<!-- e: main area -->
 </div>

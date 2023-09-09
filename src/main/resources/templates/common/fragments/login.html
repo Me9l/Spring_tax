@@ -9,8 +9,8 @@
           <input type="password" class="form-control rounded-3" name="password" placeholder="Password">
           <label>Password</label>
         </div>
-		<div id="errorMessage" class="alert alert-danger" role="alert" style="display: none;">
-		</div>
+		<p id="errorMessage" class="text-danger" role="alert" style="display: none;">
+		</p>
         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary bg-gradient" type="submit">로그인</button>
   	</form>
   	<div>
@@ -39,7 +39,7 @@
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
-                            // 로그인 성공 시 리다이렉션 또는 다음 단계 수행
+                            // 로그인 성공 시 리다이렉션
                             window.location.href = "/";
                         } else {
                             // 로그인 실패 시 에러 메시지 표시

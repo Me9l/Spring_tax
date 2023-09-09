@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-md">
 	<!-- s : LOGO -->
     <a class="navbar-brand" href="/">
-      <img src="../images/logo.png" alt="Logo" width="120" height="60" class="d-inline-block">
+      <img src="/images/logo.png" alt="Logo" width="120" height="60" class="d-inline-block">
       세무스미스
     </a>
 	<!-- e : LOGO -->
@@ -39,7 +39,7 @@
         </li>
         <li class="nav-item dropdown mx-1">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            세무자료
+            자료실
           </a>
           <ul class="dropdown-menu shadow">
             <li><a class="dropdown-item" href="/boards/news">세무뉴스</a></li>
@@ -64,9 +64,7 @@
 		<a class="btn btn-sm btn-outline-primary me-3" href="/admin/admininquire">관리자</a>
 	  </div>
       <div sec:authorize="hasAnyAuthority('ROLE_USER')">
-		<small>
-			<a href="#" class="text-dark me-3" sec:authentication="name"></a>
-		</small>
+			 <a class="text-dark me-3" th:href="@{/user/info}"><small sec:authentication="name"></small></a>
 	  </div>
       <div sec:authorize="isAuthenticated()">
       	<a class="btn btn-sm btn-outline-danger me-3" href="/user/logout"> 로그아웃 </a>

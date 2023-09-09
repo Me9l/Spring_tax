@@ -5,7 +5,7 @@
       <div class="row justify-content-center mb-5">
         <div class="text-center col-md-8 p-4 py-md-4">
           <h4 class="fw-bold"> 자료 관리 </h4>
-			<div class="input-group">
+			<div class="input-group w-75 m-auto">
 				<input type="text" id="search_keyword" class="form-control" th:value="${keyword}" onkeydown="if (event.keyCode === 13) search()"> 
 				<button id ="search_btn" class="btn btn-outline-secondary" type="button">검색</button>
 			</div>
@@ -28,7 +28,7 @@
             <tr th:each="board , loop : ${paging}">
               <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}" style="text-align: center;" scope="row"></td>
               <td class="w-50">
-				  <a th:text="${board.title}"> th:href="@{|/board/detail/${board.board_id}|}" </a>
+				  <a th:text="${board.title}" th:href="@{|/admin/data/${board.id}|}"></a>
 			  </td>
               <td th:text="${board.category == 'news' ? '뉴스' : (board.category == 'inside' ? '일정' :(board.category == 'data' ? '자료' : '기타'))}" style="text-align:center;"></td>
               <td th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm')}" style="text-align: center;"></td>

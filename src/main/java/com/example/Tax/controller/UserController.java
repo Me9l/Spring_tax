@@ -1,5 +1,7 @@
 package com.example.Tax.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,28 @@ public class UserController {
 				return "common/fragments/signup";
 			}
 		
+		return "redirect:/";
+	}
+	
+	// 사용자 정보 조회
+	@GetMapping("/info")
+	public String userDetail(Model model) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		UserEntity user = userSecurityService.getUser(email);
+		model.addAttribute("user",user);
+		return "pages/service/userDetail";
+	}
+	
+	@PostMapping("/info/update")
+	public String infoUpdate(UserForm userForm, BindingResult bindingResult, Model model) {
+		if ( bindingResult.hasErrors() ) {
+			return "pages/service/userDetail";
+		}
+		UserEntity currentUser = userSecurityService.getUser(userForm.getEmail());
+		currentUser.setTel(userForm.getTel());
+		userSecurityService.saveUser(currentUser);
 		return "redirect:/";
 	}
 }

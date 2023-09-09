@@ -47,6 +47,7 @@ public class InquireEntity extends BaseTimeEntity{
 		inquire.setContent(inquireForm.getContent());
 		inquire.setSectors(inquireForm.getSectors());
 		inquire.setOptin(inquireForm.isOptin());
+		inquire.setSettle(false);
 		inquire.setRegdate(LocalDateTime.now());
 		
 		return inquire;

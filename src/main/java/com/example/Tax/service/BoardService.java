@@ -53,4 +53,9 @@ public class BoardService {
 		System.out.println(board.getSize());
 		return board;
 	}
+
+	public BoardEntity getBoardDetail(Long id) {
+		return boardRepository.findById(id)
+				.orElseThrow(()-> new RuntimeException("게시글을 찾을 수 없습니다."));
+	}
 }

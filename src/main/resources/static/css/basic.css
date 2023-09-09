@@ -4,6 +4,12 @@
 	font-family: 'Noto Serif KR', serif;
 }
 
+@media (max-width: 768px) {
+    table > *, ol > * {
+        font-size: 0.8em;
+	}
+}
+
 #btn-to-top {
   position: fixed;
   bottom: 6rem;

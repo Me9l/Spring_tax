@@ -1,0 +1,49 @@
+<div layout:decorate="~{common/layout/defaultLayout}">
+
+	<main layout:fragment="content">
+
+		<div class="row justify-content-center mb-5">
+			<div class="rounded-4 shadow col-md-8 p-4 py-md-5">
+				<div class="container">
+					<table class="table caption-top">
+						<caption>게시글 내용</caption>
+						<thead>
+							<tr>
+								<th style="text-align:center;">제목</th>
+								<td style="text-align:center;" th:text="${board.title}">제목</td>
+								<th style="text-align:center;">작성일</th>
+								<td style="text-align:center;"
+									th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm')}">작성일자</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th style="text-align:center;">내용</th>
+								<td th:text="${board.content}" colspan="3"></td>
+							</tr>
+							<tr th:if="${board.category == 'data'}">
+								<th style="text-align: center;">첨부자료</th>
+								<td colspan="3">
+									<a>파일</a>
+								</td>
+							</tr>
+					<!--
+					<tr th:if="${board.hasFile}">
+						<th style="text-align:center;">파일</th>
+						<td colspan="3">
+							<a th:href="@{'/download/' + ${board.fileId}}" th:text="${board.fileName}"
+								download="${board.fileName}">다운로드</a>
+						</td>
+					</tr>
+					-->
+						</tbody>
+					</table>
+					<div style="text-align: end;">
+					<a href="javascript:history.back()" class="btn btn-sm btn-secondary mb-3">뒤로가기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+</div>

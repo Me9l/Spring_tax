@@ -30,4 +30,12 @@ public class BoardController {
 		model.addAttribute("paging", paging);
 		return "pages/board/board";
 	}
+	
+	@GetMapping("/detail/{id}")
+	public String boardDetail(@PathVariable("id") Long id, Model model) {
+		BoardEntity board = boardService.getBoardDetail(id);
+			model.addAttribute("board", board);
+			return "pages/board/boardDetail";
+		}
+
 }
