@@ -2,6 +2,7 @@ package com.example.Tax.entity;
 
 import java.time.LocalDateTime;
 
+import org.glassfish.jaxb.runtime.v2.runtime.output.Encoded;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.Tax.constant.UserRole;
@@ -55,4 +56,5 @@ public class UserEntity extends BaseTimeEntity{
 		user.setRole(UserRole.USER);
 		return user;
 	}
+	
 }

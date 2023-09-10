@@ -13,35 +13,40 @@
 						<h4 class="fw-bold mb-0 fs-2 text-center">TAX-SMITH</h4>
 					</div>
 					<div class="p-3 pt-0">
-						<form th:action="@{/info/update}" method="post">
+						<form th:action="@{/user/info/update}" th:object="${userForm}" method="post">
 							<div class="col-md-10 form-floating mb-3 m-auto">
 								<input type="datetime"
-									th:value="${#temporals.format(user.regdate, 'yy-MM-dd HH:mm:ss')}"
+									th:value="${#temporals.format(user.regdate, 'yy년MM월dd일 HH시mm분')}"
 									class="form-control rounded-3" placeholder="email@example.com" disabled>
 								<label>가입일</label>
 							</div>
 							<div class="col-md-10 form-floating mb-3 m-auto">
-								<input type="text" th:field="*{user.username}" class="form-control rounded-3"
-									placeholder="Name" disabled>
+								<input type="text" th:field="*{username}"
+									class="form-control rounded-3" placeholder="Name" readonly>
 								<label for="username">이름</label>
 							</div>
 							<div class="col-md-10 form-floating mb-3 m-auto">
-								<input type="email" th:field="*{user.email}" class="form-control rounded-3"
-									placeholder="email@example.com" disabled>
+								<input type="email" th:field="*{email}"
+									class="form-control rounded-3" placeholder="email@example.com" readonly>
 								<label for="email">이메일 주소</label>
 							</div>
 							<div class="col-md-10 form-floating mb-3 m-auto">
-								<input type="password" th:field="*{user.password}" class="form-control rounded-3"
-									placeholder="Password">
-								<label for="password">비밀번호 변경</label>
+								<input type="password" th:field="*{password1}"
+									class="form-control rounded-3" placeholder="Password">
+								<label for="password1">현재 비밀번호</label>
 							</div>
 							<div class="col-md-10 form-floating mb-3 m-auto">
-								<input type="text" th:field="*{user.tel}" class="form-control rounded-3"
-									placeholder="Mobile Number">
+								<input type="password" th:field="*{password2}"
+									class="form-control rounded-3" placeholder="Password">
+								<label for="password2">새로운 비밀번호</label>
+							</div>
+							<div class="col-md-10 form-floating mb-3 m-auto">
+								<input type="text" th:field="*{tel}"
+									class="form-control rounded-3" placeholder="Mobile Number">
 								<label for="tel">휴대전화번호 *</label>
 							</div>
 							<div class="col-md-10 form-floating mb-3 m-auto">
-								<select th:field="*{user.purpose}" class="form-select"
+								<select th:field="*{purpose}" class="form-select"
 									aria-label="Floating label select">
 									<option selected value="">선택안함</option>
 									<option value="taxRefund">세금환급</option>

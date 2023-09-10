@@ -81,9 +81,15 @@ public class UserSecurityService implements UserDetailsService{
 		if ( _user.isPresent() ) {
 			return _user.get();
 		} else {
-			throw new DataNotFoundException("찾을수 없는 이메일 : " + email);
+			return null;
 		}
 	}
+	
+	public void updateUser(UserEntity userEntity) {
+		userRepository.save(userEntity);
+	}
+	
+	
 	
 	public void createAdmin() {
 		UserEntity admin = new UserEntity();
