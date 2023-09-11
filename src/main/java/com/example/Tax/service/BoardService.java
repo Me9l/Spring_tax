@@ -34,6 +34,11 @@ public class BoardService {
 		boardRepository.save(board);
 	}
 	
+	public void updateBoard(BoardEntity board) {
+		boardRepository.save(board);
+	}
+	
+	
 	// paging 조회
 	public Page<BoardEntity> getBoardList(int page, String keyword) {
 		
@@ -57,5 +62,9 @@ public class BoardService {
 	public BoardEntity getBoardDetail(Long id) {
 		return boardRepository.findById(id)
 				.orElseThrow(()-> new RuntimeException("게시글을 찾을 수 없습니다."));
+	}
+
+	public void deleteBoard(Long id) {
+		boardRepository.deleteById(id);
 	}
 }

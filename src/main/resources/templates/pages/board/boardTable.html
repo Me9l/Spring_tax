@@ -16,7 +16,7 @@
 					<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"
 						style="text-align: center;" scope="row"></td>
 					<td class="w-50">
-						<a th:text="${board.title}" th:href="@{|/boards/detail/${board.id}|}"> </a>
+						<a th:text="${#strings.length(board.title) > 20 ? #strings.substring(board.title, 0, 15) + ' ...' : board.title}" th:href="@{|/boards/detail/${board.id}|}"> </a>
 					</td>
 					<td th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm')}" style="text-align: center;">
 					</td>

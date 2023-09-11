@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	Optional<UserEntity> findByEmail(String email);
 
 	@Query(
-			"SELECT u FROM UserEntity u WHERE u.username LIKE %:keyword% or u.tel LIKE %:keyword%"
+			"SELECT u FROM UserEntity u WHERE u.username LIKE %:keyword% or u.tel LIKE %:keyword% or u.email LIKE %:keyword%"
 			)
 	Page<UserEntity> findByKeyword(@Param("keyword") String keyword,Pageable pageable);
 }

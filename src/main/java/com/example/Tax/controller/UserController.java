@@ -1,6 +1,7 @@
 package com.example.Tax.controller;
 
 import org.glassfish.jaxb.runtime.v2.runtime.output.Encoded;
+import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.Tax.dto.UserForm;
+import com.example.Tax.dto.UserUpdateForm;
 import com.example.Tax.entity.UserEntity;
 import com.example.Tax.service.UserSecurityService;
 
@@ -59,7 +61,7 @@ public class UserController {
 
 	// 사용자 정보 조회
 	@GetMapping("/info")
-	public String userDetail(UserForm userForm, Model model) {
+	public String userDetail(UserUpdateForm userForm, BindingResult bindingResult, Model model) {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -70,7 +72,7 @@ public class UserController {
 			userForm.setEmail(user.getEmail());
 			userForm.setUsername(user.getUsername());
 			userForm.setTel(user.getTel());
-			model.addAttribute("user", user);
+			model.addAttribute("regdate", user.getRegdate());
 		}
 
 		return "pages/service/userDetail";
@@ -78,27 +80,63 @@ public class UserController {
 
 	// 사용자 정보 업데이트
 	@PostMapping("/info/update")
-	public String infoUpdate(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
+	public String infoUpdate(@Valid UserUpdateForm userUpdateForm, BindingResult bindingResult, Model model) {
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String email = authentication.getName();
+		UserEntity user = userSecurityService.getUser(email);
+		String currentPassword = userUpdateForm.getPassword1();
+		model.addAttribute("regdate", user.getRegdate());
+		
 		if (bindingResult.hasErrors()) {
 			return "pages/service/userDetail";
 		}
 		
-		UserEntity user = userSecurityService.getUser(userForm.getEmail());
-		if( !passwordEncoder.matches(userForm.getPassword1(), user.getPassword() ) ){
-			bindingResult.rejectValue("password1", "currentPasswordMismatch", "현재 비밀번호가 일치하지 않습니다.");
-		}
-		try {
-			user.setPassword(passwordEncoder.encode(userForm.getPassword2()));
-			user.setTel(userForm.getTel());
-			user.setPurpose(userForm.getPurpose());
-			userSecurityService.updateUser(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
+		if( !passwordEncoder.matches( currentPassword, user.getPassword() ) ){
+			bindingResult.rejectValue("password1", "currentPasswordMismatch", "비밀번호가 일치하지 않습니다.");
 			return "pages/service/userDetail";
 		}
 
+		try {
+			if ( !userUpdateForm.getPassword2().isEmpty() ) {				
+				user.setPassword(passwordEncoder.encode(userUpdateForm.getPassword2()));
+			}
+			user.setTel(userUpdateForm.getTel());
+			user.setPurpose(userUpdateForm.getPurpose());
+			userSecurityService.updateUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage",e.getMessage());
+			return "pages/service/userDetail";
+		}
+
+		return "redirect:/";
+	}
+	
+	@PostMapping("/delete")
+	public String deleteUser(UserUpdateForm userUpdateForm, BindingResult bindingResult, Model model) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		UserEntity user = userSecurityService.getUser(email);
+		String currentPassword = user.getPassword();
+		
+		if (bindingResult.hasErrors()) {
+			return "pages/service/userDetail";
+		}
+		
+		if( !passwordEncoder.matches( currentPassword, user.getPassword() ) ){
+			bindingResult.rejectValue("password1", "currentPasswordMismatch", "비밀번호가 일치하지 않습니다.");
+			return "pages/service/userDetail";
+		}
+
+		try {
+			userSecurityService.deleteUser(user);
+			return "redirect:/user/logout";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/";
 	}
 }

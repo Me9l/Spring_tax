@@ -90,7 +90,7 @@ public class adminController {
 		}
 		UserEntity user = userSecurityService.getUser(principal.getName());
 		boardService.saveBoard(boardForm.getTitle(), boardForm.getContent(), boardForm.getCategory(), user);
-		return "redirect:/admin/admindata";
+		return "redirect:/admin/data";
 	}
 
 	// 상담 상세 내용 보기
@@ -102,7 +102,7 @@ public class adminController {
 		return "pages/admin/inquireDetail";
 	}
 
-	// 자료 상세보기 및 수정
+	// 자료 상세보기
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/data/{id}")
 	public String dataDetail(
@@ -112,7 +112,67 @@ public class adminController {
 		model.addAttribute("board",board);
 		return "pages/admin/dataDetail";
 	}
+	
+	// 자료 수정 페이지
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/data/update/{id}")
+	public String dataUpdate(
+			@PathVariable("id") Long id,
+			BoardForm boardForm,
+			Model model
+			) {
+		BoardEntity board = boardService.getBoardDetail(id);
+		model.addAttribute("boardForm",boardForm);
+		model.addAttribute("board",board);
+		return "pages/admin/dataUpdate";
+	}
 
+	// 자료 수정
+	@PostMapping("/data/update/{id}")
+	public String dataUpdate(
+			@PathVariable Long id,
+			@Valid BoardForm boardForm,
+			BindingResult bindingResult,
+			Model model,
+			Principal principal
+			) {
+		model.addAttribute("boardForm", boardForm);
+
+		if (bindingResult.hasErrors()) {
+			return "redirect:/admin/data/update/"+id;
+		}
+		
+		BoardEntity board = boardService.getBoardDetail(id);
+
+		if( board == null ) {
+			return "redirect:/admin/data";
+		}
+		
+		if (!board.getUser().getEmail().equals(principal.getName())) {
+			return "redirect:/admin/data";
+		}
+		try {
+			board.setTitle(boardForm.getTitle());
+			board.setContent(boardForm.getContent());
+			board.setCategory(boardForm.getCategory());
+			
+			boardService.updateBoard(board);
+			} catch (IllegalStateException e) {
+				model.addAttribute("errorMessage",e.getMessage());
+		}
+		
+		return "redirect:/admin/data";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/data/delete/{id}")
+	public String dataDelete(@PathVariable Long id) {
+		
+		boardService.deleteBoard(id);
+		
+		return "redirect:/admin/data";
+	}
+	
 	@ExceptionHandler(AccessDeniedException.class)
 	public String handleAccessDeniedException() {
 		return "redirect:/";

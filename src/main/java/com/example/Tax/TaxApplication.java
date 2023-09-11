@@ -16,7 +16,7 @@ public class TaxApplication {
 	public TaxApplication(UserSecurityService userSecurityService) {
 		this.userSecurityService = userSecurityService;
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(TaxApplication.class, args);
 	}

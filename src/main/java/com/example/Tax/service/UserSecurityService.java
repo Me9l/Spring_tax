@@ -85,12 +85,17 @@ public class UserSecurityService implements UserDetailsService{
 		}
 	}
 	
+	// 유저 정보 업데이트
 	public void updateUser(UserEntity userEntity) {
 		userRepository.save(userEntity);
 	}
 	
+	// 유저 정보 삭제
+	public void deleteUser(UserEntity userEntity) {
+		userRepository.delete(userEntity);
+	}
 	
-	
+	// 관리자계정 생성
 	public void createAdmin() {
 		UserEntity admin = new UserEntity();
 		if (!userRepository.findByEmail("admin@admin.com").isPresent()) {

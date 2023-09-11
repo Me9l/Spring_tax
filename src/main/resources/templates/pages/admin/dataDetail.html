@@ -12,6 +12,7 @@
 								<th style="text-align:center;">No</th>
 								<td style="text-align:center;" th:text="${board.id}"></td>
 								<th style="text-align:center;">분류</th>
+								<td th:text="${board.category == 'news' ? '뉴스' : (board.category == 'inside' ? '일정' :(board.category == 'data' ? '자료' : '기타'))}" style="text-align:center;"></td>
 								<th style="text-align:center;">작성일</th>
 								<td style="text-align:center;" th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm:ss')}"></td>
 							</tr>
@@ -27,9 +28,11 @@
 							</tr>
 						</tbody>
 					</table>
-					<div>
-						<button>수정</button>
-						<button>삭제</button>
+					<div class="d-flex justify-content-end">
+						<a th:href="@{|/admin/data/update/${board.id}|}" class="btn btn-sm btn-primary m-1">수정</a>
+						<form th:action="@{|/admin/data/delete/${board.id}|}" method="post">
+							<button type="submit" class="w-10 btn btn-sm btn-secondary m-1">삭제</button>
+						</form>
 					</div>
 				</div>
 			</div>

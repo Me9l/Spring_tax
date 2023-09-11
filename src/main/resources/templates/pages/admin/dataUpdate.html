@@ -1,0 +1,61 @@
+<div layout:decorate="~{common/layout/adminLayout}">
+
+	<main layout:fragment="adminContent">
+
+		<div class="row justify-content-center mb-5">
+			<div class="rounded-4 shadow col-md-8 p-4 py-md-5">
+				<div class="container">
+					<form th:action="@{|/admin/data/update/${board.id}|}" th:object="${boardForm}" method="post">
+						<table class="table caption-top">
+							<caption>자료 수정</caption>
+							<thead>
+								<tr>
+									<th style="text-align:center;">No</th>
+									<td style="text-align:center;" th:text="${board.id}"></td>
+									<th style="text-align:center;">분류</th>
+									<td>
+										<select id="category" name="category">
+											<option selected value="news">뉴스</option>
+											<option value="inside">일정</option>
+											<option value="data">자료</option>
+										</select>
+									</td>
+									<th style="text-align:center;">작성일</th>
+									<td style="text-align:center;"
+										th:text="${#temporals.format(board.regdate, 'yy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th style="text-align:center;">제목</th>
+									<td colspan="5">
+										<input type="text" id="title" name="title" class="form-control rounded-3"
+											th:value="${board.title}">
+									</td>
+								</tr>
+								<tr>
+									<th style="text-align:center;">내용</th>
+									<td colspan="5">
+										<textarea id="content" name="content" class="form-control rounded-3"
+											th:text="${board.content}"></textarea>
+									</td>
+								</tr>
+							</tbody>
+							<div class="row justify-content-center">
+								<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+									style="color: red;"></span>
+								<span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"
+									style="color: red;"></span>
+							</div>
+						</table>
+						<div class="d-flex justify-content-end">
+							<button class="btn btn-sm btn-primary m-1" type="submit">저장</button>
+							<a href="javascript:history.back()" class="w-10 btn btn-sm btn-secondary m-1">취소</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</main>
+</div>

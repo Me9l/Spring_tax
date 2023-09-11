@@ -6,7 +6,8 @@
 
 @media (max-width: 768px) {
     table > *, ol > * {
-        font-size: 0.8em;
+        font-size: 0.6em;
+        font-weight: bolder;
 	}
 }
 
@@ -154,7 +155,7 @@ small {
 .breadcrumb-custom .breadcrumb-item {
   position: relative;
   flex-grow: 1;
-  padding: .75rem 3rem;
+  padding: .75rem 2rem;
 }
 
 .breadcrumb-custom .breadcrumb-item::before {
